@@ -1,0 +1,21 @@
+.header {
+  background-color: #e7f9fd;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+div.header a {
+  color: #007bff;
+  margin: 1.2rem;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+div.header a:hover {
+  color: #0056b3;
+}
+
+div.header a.active {
+  color: #0056b3;
+}

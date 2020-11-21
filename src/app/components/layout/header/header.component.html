@@ -1,1 +1,41 @@
-<p>header works!</p>
+<!-- <nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a href="" class="navbar-brand">Recipe Book</a>
+    </div>
+    <div class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+        <li><a href="">Recipes</a></li>
+        <li><a href="">Shopping List</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+          <a href="" class="dropdown-toggle" role="button">Mangae <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="">Save Data</a></li>
+            <li><a href="">Load Data</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav> -->
+
+<div class="header">
+  <div class="navbar-brand" style="margin: 1.2rem;">
+    <a routerLink="/">Recipe Book</a>
+  </div>
+
+  <div style="display: flex; margin-right: 2rem;">
+    <a routerLink="/recipe" routerLinkActive="active" *ngIf="isAuthenticated">Recipes</a>
+    <a routerLink="/auth" routerLinkActive="active" *ngIf="!isAuthenticated">Authenticate</a>
+    <a *ngIf="isAuthenticated" (click)="onLogout()">Logout</a>
+    <a routerLink="/shopping-list" routerLinkActive="active">Shopping List</a>
+  </div>
+
+  <div *ngIf="isAuthenticated">
+      <a (click)="onSaveData()">Save Data</a>
+      <a (click)="onLoadData()">Load Data</a>
+  </div>
+
+</div>
