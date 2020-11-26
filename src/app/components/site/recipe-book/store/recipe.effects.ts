@@ -18,13 +18,13 @@ export class RecipeEffects {
   saveRecipes = this.actions$.pipe(
     ofType(RecipeActions.SAVE_RECIPES),
     tap((recipeData: RecipeActions.SaveRecipes) => {
-      // this.http
-      //   .put(
-      //     'https://ng-guide-1473a.firebaseio.com/recipes.json',
-      //     recipeData.payload
-      //   )
-      //   .pipe(take(1))
-      //   .subscribe();
+      this.http
+        .put(
+          'https://ng-guide-1473a.firebaseio.com/recipes.json',
+          recipeData.payload
+        )
+        .pipe(take(1))
+        .subscribe();
     })
   );
 
@@ -36,6 +36,7 @@ export class RecipeEffects {
         .get<Recipe[]>('https://ng-guide-1473a.firebaseio.com/recipes.json')
         .pipe(
           map((resData) => {
+            console.log(resData);
             return new RecipeActions.LoadRecipesSuccess(resData);
           }),
           catchError((errorRes) => {
