@@ -1,37 +1,18 @@
-
-<div class="row">
-  <div class="col-xs-12">
-    <img [src]="recipe.imagePath" alt="" class="img-responsive" style="max-width: 35rem;">
-  </div>
-</div>
-<div class="row">
-  <div class="col-xs-12">
-    <h1>{{ recipe.name }}</h1>
-  </div>
-</div>
-<div class="row">
-  <div class="col-xs-12">
-    <div class="dropdown" appDropdown>
-      <button class="btn btn-primary dropdown-toggle" style="outline: none;" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Manage Recipe
-      </button>
-      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <a class="dropdown-item" (click)="onToShoppingList()">To Shopping List</a>
-        <a class="dropdown-item" routerLink="edit" >Edit Recipe</a>
-        <a class="dropdown-item" (click)="onDelete()">Delete Recipe</a>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="row">
-  <div class="col-xs-12">
-    <p appColor>{{ recipe.description }}</p>
-  </div>
-</div>
-<div class="row">
-  <div class="col-xs-12">
-    <ul class="list-group">
-      <li class="list-group-item" *ngFor="let ingredient of recipe.ingredients">{{ ingredient.name }} ({{ ingredient.amount }})</li>
-    </ul>
-  </div>
-</div>
+<mat-card>
+  <mat-card-title>
+    {{ recipe.name }}
+  </mat-card-title>
+  <img mat-card-image [src]="recipe.imagePath" alt="">
+  <mat-card-content>
+    <p>{{ recipe.description }}</p>
+    <mat-list>
+      <mat-list-item *ngFor="let ingredient of recipe.ingredients">{{ ingredient.name }}
+        ({{ ingredient.amount }})</mat-list-item>
+    </mat-list>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button color="primary" (click)="onToShoppingList()">To Shopping List</button>
+    <button mat-raised-button color="primary" routerLink="edit">Edit Recipe</button>
+    <button mat-raised-button color="warn" (click)="onDelete()">Delete Recipe</button>
+  </mat-card-actions>
+</mat-card>

@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MaterialModule } from 'src/app/material.module';
 
 import { SharedModule } from '../shared/shared.module';
 import { RecipeBookComponent } from './recipe-book.component';
@@ -24,7 +26,9 @@ import { RecipesRoutingModule } from './recipes-routing.module';
     CommonModule,
     ReactiveFormsModule,
     RecipesRoutingModule,
-    SharedModule
+    SharedModule,
+    MaterialModule,
+    FlexLayoutModule
   ]
 })
 export class RecipesModule {

@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { map, take } from 'rxjs/operators';
@@ -15,6 +15,9 @@ import * as RecipeActions from '../../site/recipe-book/store/recipe.actions';
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit, OnDestroy {
+
+  @Output() sidenaveToggle = new EventEmitter<void>();
+
   userSubscription: Subscription;
 
   isAuthenticated = false;
@@ -28,7 +31,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.userSubscription = this.store
       .select('auth')
       .pipe(map((authData) => authData.user))
-      .subscribe((user) => (this.isAuthenticated = !!user));
+      .subscribe((user) => {
+         (this.isAuthenticated = !!user)
+       });
   }
 
   onSaveData() {
@@ -52,5 +57,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.userSubscription.unsubscribe();
+  }
+
+  onToggle() {
+    this.sidenaveToggle.emit();
   }
 }

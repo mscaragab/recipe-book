@@ -19,6 +19,8 @@ export class EditStart implements Action {
 
 export class EditCancel implements Action {
   readonly type = EDIT_CANCEL;
+
+  constructor(public payload: number) {}
 }
 
 export class UpdateRecipe implements Action {

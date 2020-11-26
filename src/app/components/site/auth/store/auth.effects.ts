@@ -3,20 +3,18 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
-import { catchError, map, switchMap, tap } from 'rxjs/operators';
+import { catchError, map, switchMap, take, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { AuthResponseData } from '../auth.service';
 import * as AuthActions from '../store/auth.actions';
 import * as RecipeActions from '../../recipe-book/store/recipe.actions';
 import { User } from '../user.model';
 
-
 @Injectable()
 export class AuthEffects {
   private signUpEndPoint: string;
   private loginEndPoint: string;
   private logoutTimer;
-
 
   @Effect()
   authSignUpStart = this.actions$.pipe(
@@ -58,7 +56,6 @@ export class AuthEffects {
         })
         .pipe(
           map((resData) => {
-            console.log('Login success', resData);
             return new AuthActions.AutheticationSuccess({
               email: resData.email,
               userId: resData.localId,
@@ -75,15 +72,32 @@ export class AuthEffects {
     })
   );
 
+  private userData = null;
+
   @Effect()
   authSuccess = this.actions$.pipe(
     ofType(AuthActions.AUTHENTICATION_SUCCESS),
+    // tap((authData: AuthActions.AutheticationSuccess) => {
+    //   console.log('2-UserData: ', this.userData);
+    //   localStorage.setItem('user', JSON.stringify(this.userData));
+    // }),
     switchMap((authData: AuthActions.AutheticationSuccess) => {
-      return of(new RecipeActions.LoadRecipesStart());
-    }),
-    tap(() => {
-      this.router.navigate(['/']);
+      console.log('@Effects Auth Success, User: ', authData.payload);
+      this.userData = authData.payload;
+      localStorage.setItem('user', JSON.stringify(this.userData));
+      const expiresIn =
+        this.userData.expirationDate * 1000 - new Date().getTime();
+      return of(
+        new RecipeActions.LoadRecipesStart(),
+        new AuthActions.Redirect(),
+        // new AuthActions.AutoLogout(expiresIn)
+      );
     })
+    // take(1),
+    // tap(() => {
+    //   console.log('2-UserData: ', this.userData);
+    //   localStorage.setItem('user', JSON.stringify(this.userData));
+    // })
   );
 
   @Effect({ dispatch: false })
@@ -91,55 +105,30 @@ export class AuthEffects {
     ofType(AuthActions.LOGOUT),
     tap(() => {
       this.router.navigate(['/auth']);
-    })
-  );
-
-  @Effect()
-  authAutoLogin = this.actions$.pipe(
-    ofType(AuthActions.AUTO_LOGIN),
-    switchMap((authData: AuthActions.AutoLogin) => {
-      const userData = localStorage.getItem('user');
-      if (userData) {
-        const userData: {
-          email: string;
-          id: string;
-          _token: string;
-          _expirationDate: number;
-        } = JSON.parse(localStorage.getItem('user'));
-        const user = new User(
-          userData.email,
-          userData.id,
-          userData._token,
-          userData._expirationDate
-        );
-        if (user) {
-          return of(
-            new AuthActions.AutheticationSuccess({
-              email: userData.email,
-              userId: userData.id,
-              token: userData._token,
-              expirationDate: userData._expirationDate,
-            })
-          ).pipe(
-            tap(() => {
-              // this.autoLogout(
-              //   userData._expirationDate * 1000 - new Date().getTime()
-              // );
-            })
-          );
-        }
+      if (this.logoutTimer) {
+        clearTimeout(this.logoutTimer);
+        this.logoutTimer = null;
       }
-      return of();
     })
   );
 
   @Effect({ dispatch: false })
+  authRedirect = this.actions$.pipe(
+    ofType(AuthActions.REDIRECT),
+    tap(() => {
+      this.router.navigate(['/']);
+    })
+  );
+
+  @Effect()
   authAutoLogout = this.actions$.pipe(
     ofType(AuthActions.AUTO_LOGOUT),
-    tap((authData: AuthActions.AutoLogout) => {
-      this.logoutTimer = setTimeout(() => {
-        // dispatch logout
-      }, authData.payload);
+    switchMap((authData: AuthActions.AutoLogout) => {
+      return new Promise((resolve, reject) => {
+        this.logoutTimer = setTimeout(() => {
+          resolve(new AuthActions.Logout());
+        }, authData.payload);
+      });
     })
   );
 

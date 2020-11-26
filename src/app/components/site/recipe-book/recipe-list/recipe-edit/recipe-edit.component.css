@@ -1,1 +1,43 @@
 
+.ingredient-row {
+  text-align: center;
+}
+
+@media (min-width: 600px) {
+  img {
+    width: 600px;
+  }
+
+  mat-form-field {
+    width: 600px;
+  }
+
+  .ingredient-name {
+    width: 400px;
+    margin-left: 5px;
+  }
+
+  .ingredient-amount {
+    width: 150px;
+    margin-left: 15px;
+  }
+}
+
+@media (max-width: 599px) {
+  img {
+    width: 80%;
+  }
+
+  mat-form-field {
+    width: 90%;
+  }
+
+  .ingredient-name {
+    width: 60%;
+  }
+
+  .ingredient-amount {
+    width: 15%;
+    margin-left: 10px;
+  }
+}

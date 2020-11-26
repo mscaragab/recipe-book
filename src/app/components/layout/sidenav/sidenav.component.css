@@ -1,0 +1,14 @@
+a {
+  text-decoration: none;
+  color: white;
+}
+
+a:hover,
+a:active {
+  color: lightgray;
+}
+
+button[mat-menu-item] span {
+  padding-left: 15px;
+  padding-right: 107px;
+}

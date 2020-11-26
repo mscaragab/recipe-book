@@ -1,42 +1,17 @@
-<div class="row">
-  <div class="col-xs-12">
-    <form (ngSubmit)="onSubmit()" #f="ngForm">
-      <div class="row">
-        <div class="col-sm-7 form-group">
-          <label for="name">Name</label>
-          <input
-            type="text"
-            id="name"
-            class="form-control"
-            ngModel
-            name="name"
-            required
-            >
-        </div>
-        <div class="col-sm-3 form-group">
-          <label for="amount">Amount</label>
-          <input
-            type="number"
-            id="amount"
-            class="form-control"
-            ngModel
-            name="amount"
-            required
-            pattern="^[1-9]+[0-9]*$"
-            >
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-xs-12">
-          <button
-            class="btn btn-success"
-            type="submit"
-            style="margin:1.1rem"
-            [disabled]="!f.valid">{{ editMode ? 'Update' : 'Add'}}</button>
-          <button *ngIf="editMode" (click)="onDelete()" class="btn btn-danger" type="button" style="margin:1.1rem">Delete</button>
-          <button (click)="onClear()" class="btn btn-primary" type="button" style="margin:1.1rem">Clear</button>
-        </div>
-      </div>
-    </form>
-  </div>
-</div>
+<section style="margin-top: 15px;" >
+  <form (ngSubmit)="onSubmit()" #f="ngForm" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" >
+      <mat-form-field>
+        <input matInput placeholder="Name" type="text" id="name" ngModel name="name" required>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Amount" type="number" id="amount" ngModel name="amount" required pattern="^[1-9]+[0-9]*$">
+      </mat-form-field>
+
+    <div fxLayout="row" fxLayoutGap="10px">
+      <button mat-raised-button color="primary" type="submit"
+        [disabled]="f.invalid">{{ editMode ? 'Update' : 'Add'}}</button>
+      <button mat-raised-button color="warn" *ngIf="editMode" (click)="onDelete()" type="button">Delete</button>
+      <button mat-raised-button color="primary" (click)="onClear()" type="button">Clear</button>
+    </div>
+  </form>
+</section>

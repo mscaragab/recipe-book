@@ -1,4 +1,13 @@
-a.active {
-  background-color:#0876eb;
+mat-card {
+  cursor: pointer;
+  margin: 10px;
+}
+
+mat-card.active {
   color: white;
+  background-color: #0097A7  ;
+}
+
+mat-card:focus {
+  outline: none;
 }

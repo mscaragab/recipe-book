@@ -11,18 +11,19 @@ import { MaterialModule } from './material.module';
 import { AuthInterceptorService } from './components/site/auth/auth-interceptor.service';
 import { SharedModule } from './components/site/shared/shared.module';
 import { NotFoundModule } from './components/site/not-found/not-found.module';
-import { shoppingListReducer } from './components/site/shopping-list/store/shopping-list.reducer';
 import * as fromApp from './store/app.reducer';
-import { from } from 'rxjs';
 import { EffectsModule } from '@ngrx/effects';
 import { AuthEffects } from './components/site/auth/store/auth.effects';
 import { RecipeEffects } from './components/site/recipe-book/store/recipe.effects';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { SidenavComponent } from './components/layout/sidenav/sidenav.component';
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent],
+  declarations: [AppComponent, HeaderComponent, SidenavComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    FlexLayoutModule,
     MaterialModule,
     StoreModule.forRoot(fromApp.AppReducer),
     EffectsModule.forRoot([AuthEffects, RecipeEffects]),
@@ -37,6 +38,12 @@ import { RecipeEffects } from './components/site/recipe-book/store/recipe.effect
       useClass: AuthInterceptorService,
       multi: true,
     },
+    // {
+    //   provide: APP_INITIALIZER,
+    //   useFactory: (service: AppInitializerService) => service.init(),
+    //   deps: [AppInitializerService],
+    //   multi: true
+    // }
   ],
   bootstrap: [AppComponent],
 })

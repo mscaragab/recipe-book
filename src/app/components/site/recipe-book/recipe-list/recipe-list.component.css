@@ -1,0 +1,8 @@
+app-recipe-item {
+  cursor: pointer;
+}
+
+app-recipe-item.active {
+  color: white;
+  background-color: #060f92;
+}

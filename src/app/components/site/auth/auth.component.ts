@@ -1,4 +1,3 @@
-import { HttpErrorResponse } from '@angular/common/http';
 import {
   Component,
   ComponentFactoryResolver,
@@ -44,7 +43,7 @@ export class AuthComponent implements OnInit, OnDestroy {
 
   closeSubscription: Subscription;
 
-  
+
 
   ngOnInit(): void {}
 

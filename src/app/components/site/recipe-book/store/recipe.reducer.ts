@@ -43,7 +43,6 @@ export function recipeReducer(
       };
       const updatedRecipes = [...state.recipes];
       updatedRecipes[state.editRecipeIndex] = updatedRecipe;
-      console.log(updatedRecipes);
       return {
         ...state,
         recipes: updatedRecipes,

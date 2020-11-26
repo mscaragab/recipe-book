@@ -15,7 +15,9 @@ export class RecipeListComponent implements OnInit {
 
   selectedRecipe: Recipe;
 
-  constructor(private store: Store<fromApp.AppState>) {}
+  constructor(
+    private store: Store<fromApp.AppState>
+  ) {}
 
   ngOnInit(): void {
     this.recipes$ = this.store.select(fromRecipe.getRecipes);

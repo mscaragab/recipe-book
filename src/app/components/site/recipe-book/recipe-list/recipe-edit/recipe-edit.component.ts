@@ -111,7 +111,13 @@ export class RecipeEditComponent implements OnInit {
   }
 
   onCancel() {
-    this.store.dispatch(new RecipeActions.EditCancel());
+    let index = this.index;
+    if (!index) {
+      index = -1;
+    }
+    console.log('This Index, ', this.index);
+    console.log('Index ', index);
+    this.store.dispatch(new RecipeActions.EditCancel(this.index));
   }
 
   onDeleteIngredient(index: number) {

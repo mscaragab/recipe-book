@@ -1,3 +1,4 @@
+import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { User } from '../user.model';
 import * as AuthActions from './auth.actions';
 
@@ -46,6 +47,7 @@ export function authReducer(
         isLoading: false,
       };
     case AuthActions.LOGOUT:
+      console.log('LOGOUT FIRED!');
       return {
         ...state,
         user: null,
@@ -56,8 +58,17 @@ export function authReducer(
         authError: null,
       };
     case AuthActions.AUTO_LOGIN:
+      user = new User(
+        action.payload.email,
+        action.payload.userId,
+        action.payload.token,
+        action.payload.expirationDate
+      );
       return {
         ...state,
+        user: user,
+        authError: null,
+        isLoading: false,
       };
     case AuthActions.AUTO_LOGOUT:
       return {
@@ -67,3 +78,6 @@ export function authReducer(
       return state;
   }
 }
+
+const getAuthState = createFeatureSelector<State>('auth');
+export const getIsAuth = createSelector(getAuthState, state => state.user != null);

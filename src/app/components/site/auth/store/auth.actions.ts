@@ -8,6 +8,7 @@ export const LOGOUT = '[Auth] Logout';
 export const CLEAR_ERROR = '[Auth] Clear Error';
 export const AUTO_LOGIN = '[Auth] Auto Login';
 export const AUTO_LOGOUT = '[Auth] Auto Logout';
+export const REDIRECT = '[Auth] Redirect';
 
 export class SignUpStart implements Action {
   readonly type = SIGNUP_START;
@@ -50,12 +51,25 @@ export class ClearError implements Action {
 
 export class AutoLogin implements Action {
   readonly type = AUTO_LOGIN;
+  
+  constructor(
+    public payload: {
+      email: string;
+      userId: string;
+      token: string;
+      expirationDate: number;
+    }
+  ) {}
 }
 
 export class AutoLogout implements Action {
   readonly type = AUTO_LOGOUT;
 
   constructor(public payload: number) {}
+}
+
+export class Redirect implements Action {
+  readonly type = REDIRECT;
 }
 
 export type AuthActions =
@@ -66,4 +80,5 @@ export type AuthActions =
   | Logout
   | ClearError
   | AutoLogin
-  | AutoLogout;
+  | AutoLogout
+  | Redirect;
