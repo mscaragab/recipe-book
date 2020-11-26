@@ -65,7 +65,11 @@ export class RecipeEffects {
   editCancelled = this.actions$.pipe(
     ofType(RecipeActions.EDIT_CANCEL),
     tap((editCancel: RecipeActions.EditCancel) => {
-      this.router.navigate(['/recipe/', editCancel.payload]);
+      if (isNaN(editCancel.payload)) {
+        this.router.navigate(['/recipe']);
+      } else {
+        this.router.navigate(['/recipe/', editCancel.payload]);
+      }
     })
   );
 
