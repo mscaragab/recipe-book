@@ -115,8 +115,6 @@ export class RecipeEditComponent implements OnInit {
     if (!index) {
       index = -1;
     }
-    console.log('This Index, ', this.index);
-    console.log('Index ', index);
     this.store.dispatch(new RecipeActions.EditCancel(this.index));
   }
 

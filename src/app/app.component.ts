@@ -21,7 +21,6 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    console.log('App Component');
     if (isPlatformBrowser(this.platformId)) {
     }
     // this.store
@@ -39,9 +38,7 @@ export class AppComponent implements OnInit {
       .select(fromRecipe.getRecipes)
       .pipe(take(1))
       .subscribe((recipes: Recipe[]) => {
-        console.log('From App Component, Recipes :   ', recipes);
         if (!recipes || recipes.length < 1) {
-          console.log('App Component dispatch LoadRecipesStart Action...');
           this.store.dispatch(new Recipes.LoadRecipesStart());
         }
       });

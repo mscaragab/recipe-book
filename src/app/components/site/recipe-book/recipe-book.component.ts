@@ -15,13 +15,13 @@ export class RecipeBookComponent implements OnInit {
   constructor(private store: Store<fromApp.AppState>) {}
 
   ngOnInit(): void {
-    // this.store
-    //   .select(fromRecipe.getRecipes)
-    //   .pipe(take(1))
-    //   .subscribe((recipes: Recipe[]) => {
-    //     if (recipes && recipes.length < 1) {
-    //       this.store.dispatch(new Recipes.LoadRecipesStart());
-    //     }
-    //   });
+    this.store
+      .select(fromRecipe.getRecipes)
+      .pipe(take(1))
+      .subscribe((recipes: Recipe[]) => {
+        if (recipes && recipes.length < 1) {
+          this.store.dispatch(new Recipes.LoadRecipesStart());
+        }
+      });
   }
 }

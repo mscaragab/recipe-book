@@ -47,7 +47,6 @@ export function authReducer(
         isLoading: false,
       };
     case AuthActions.LOGOUT:
-      console.log('LOGOUT FIRED!');
       return {
         ...state,
         user: null,

@@ -5,6 +5,9 @@ import { Observable } from 'rxjs';
 import * as fromApp from '../../../store/app.reducer';
 import * as fromAuth from '../../site/auth/store/auth.reducer';
 import * as Auth from '../../site/auth/store/auth.actions';
+import * as Recipes from '../../site/recipe-book/store/recipe.actions';
+import * as fromRecipe from '../../site/recipe-book/store/recipe.reducer';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-sidenav',
@@ -27,10 +30,17 @@ export class SidenavComponent implements OnInit {
   }
 
   onLoadData() {
+    this.store.dispatch(new Recipes.LoadRecipesStart());
     this.onCloseSidenav();
   }
 
   onSaveData() {
+    this.store
+      .select(fromRecipe.getRecipes)
+      .pipe(take(1))
+      .subscribe((recipes) => {
+        this.store.dispatch(new Recipes.SaveRecipes(recipes));
+      });
     this.onCloseSidenav();
   }
 

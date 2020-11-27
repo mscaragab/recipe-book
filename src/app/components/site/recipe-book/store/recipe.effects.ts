@@ -36,7 +36,6 @@ export class RecipeEffects {
         .get<Recipe[]>('https://ng-guide-1473a.firebaseio.com/recipes.json')
         .pipe(
           map((resData) => {
-            console.log(resData);
             return new RecipeActions.LoadRecipesSuccess(resData);
           }),
           catchError((errorRes) => {

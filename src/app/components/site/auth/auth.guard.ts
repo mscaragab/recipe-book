@@ -15,10 +15,7 @@ import * as Auth from '../auth/store/auth.actions';
 
 @Injectable({ providedIn: 'root' })
 export class AuthGuard implements CanActivate {
-  constructor(
-    private router: Router,
-    private store: Store<fromApp.AppState>
-  ) {}
+  constructor(private router: Router, private store: Store<fromApp.AppState>) {}
 
   canActivate(
     route: ActivatedRouteSnapshot,
@@ -29,24 +26,22 @@ export class AuthGuard implements CanActivate {
     | Observable<boolean | UrlTree>
     | Promise<boolean | UrlTree> {
     const promise = new Promise<boolean | UrlTree>((resolve, reject) => {
-      // console.log('Gaurd start...');
-      this.store.select('auth').pipe(
-        take(1),
-        map((authData) => authData.user),
-        map((user) => {
-          // console.log('Guard map reached...');
-          if (user) {
-            // console.log('Guard resolve true...');
-            resolve(true);
-          } else if (this.autoLogin()) {
-            // console.log('Guard resolved true after autoLogin...');
-            resolve(true);
-          } else {
-            // console.log('Guard resolved false and redirected to /auth...');
-            resolve(this.router.createUrlTree(['/auth']));
-          }
-        })
-      ).subscribe();
+      this.store
+        .select('auth')
+        .pipe(
+          take(1),
+          map((authData) => authData.user),
+          map((user) => {
+            if (user) {
+              resolve(true);
+            } else if (this.autoLogin()) {
+              resolve(true);
+            } else {
+              resolve(this.router.createUrlTree(['/auth']));
+            }
+          })
+        )
+        .subscribe();
     });
 
     return promise;
@@ -61,8 +56,10 @@ export class AuthGuard implements CanActivate {
         token: string;
         expirationDate: number;
       } = JSON.parse(localStorage.getItem('user'));
-      this.store.dispatch(new Auth.AutoLogin(userData));
-      return true;
+      if (userData.expirationDate > new Date().getTime()) {
+        this.store.dispatch(new Auth.AutoLogin(userData));
+        return true;
+      }
     }
     return false;
   }
