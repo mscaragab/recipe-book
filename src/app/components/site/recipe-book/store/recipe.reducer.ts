@@ -92,5 +92,6 @@ export function recipeReducer(
   }
 }
 
-export const getRecipeState = createFeatureSelector<State>('recipe');
+const getRecipeState = createFeatureSelector<State>('recipe');
 export const getRecipes = createSelector(getRecipeState, state => state.recipes);
+export const isLoading = createSelector(getRecipeState, state => state.isLoading);

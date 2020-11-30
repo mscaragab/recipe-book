@@ -1,4 +1,8 @@
-<div fxLayout="column" fxLayout.gt-xs="row" fxLayoutAlign="start start" fxLayoutGap="10px" fxLayoutGap.gt-xs="15px">
+<div *ngIf='isLoading$ | async' style="margin-top: 15px;" fxLayout fxLayoutAlign='center center'>
+  <mat-spinner></mat-spinner>
+</div>
+<div *ngIf='!(isLoading$ | async)' fxLayout="column" fxLayout.gt-xs="row" fxLayoutAlign="start start" fxLayoutGap="10px"
+  fxLayoutGap.gt-xs="15px">
 
   <app-recipe-list fxFlex.gt-xs="30"></app-recipe-list>
 

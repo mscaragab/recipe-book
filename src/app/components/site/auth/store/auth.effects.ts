@@ -9,6 +9,8 @@ import { AuthResponseData } from '../auth.service';
 import * as AuthActions from '../store/auth.actions';
 import * as RecipeActions from '../../recipe-book/store/recipe.actions';
 import { User } from '../user.model';
+import { UIService } from '../../shared/ui.service';
+import { title } from 'process';
 
 @Injectable()
 export class AuthEffects {
@@ -101,6 +103,14 @@ export class AuthEffects {
   );
 
   @Effect({ dispatch: false })
+  authFail = this.actions$.pipe(
+    ofType(AuthActions.AUTHENTICATION_FAIL),
+    tap((action: AuthActions.AuthenticationFail) => {
+      this.uiService.openDialog('Error', action.payload);
+    })
+  );
+
+  @Effect({ dispatch: false })
   authLogout = this.actions$.pipe(
     ofType(AuthActions.LOGOUT),
     tap(() => {
@@ -135,7 +145,8 @@ export class AuthEffects {
   constructor(
     private actions$: Actions,
     private http: HttpClient,
-    private router: Router
+    private router: Router,
+    private uiService: UIService
   ) {
     this.loginEndPoint =
       'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=' +
