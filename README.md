@@ -7,7 +7,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Live Demo
 
-Visit [Recipe Book](https://ng-guide-1473a.web.app/)
+Visit [Recipe Book](https://ng-recipe-book.netlify.app/)
 
 
 ## Development server
