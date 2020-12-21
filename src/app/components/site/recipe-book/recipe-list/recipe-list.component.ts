@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Recipe } from '../recipe.model';
-import * as fromApp from '../../../../store/app.reducer';
 import * as fromRecipe from '../store/recipe.reducer';
 
 @Component({
@@ -16,7 +15,7 @@ export class RecipeListComponent implements OnInit {
   selectedRecipe: Recipe;
 
   constructor(
-    private store: Store<fromApp.AppState>
+    private store: Store<fromRecipe.AppState>
   ) {}
 
   ngOnInit(): void {

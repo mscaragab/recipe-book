@@ -8,14 +8,14 @@ import {
 } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map, take, tap } from 'rxjs/operators';
-
-import * as fromApp from '../../../store/app.reducer';
 import { Store } from '@ngrx/store';
+
 import * as Auth from '../auth/store/auth.actions';
+import * as fromAuth from './store/auth.reducer';
 
 @Injectable({ providedIn: 'root' })
 export class AuthGuard implements CanActivate {
-  constructor(private router: Router, private store: Store<fromApp.AppState>) {}
+  constructor(private router: Router, private store: Store<fromAuth.AppState>) {}
 
   canActivate(
     route: ActivatedRouteSnapshot,

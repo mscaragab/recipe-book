@@ -31,6 +31,7 @@ import { SidenavComponent } from './components/layout/sidenav/sidenav.component'
     AppRoutingModule,
     SharedModule,
     NotFoundModule,
+    // ServiceWorkerModule.register('./ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [
     {

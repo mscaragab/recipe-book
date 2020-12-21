@@ -6,9 +6,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { RecipeBookService } from '../../recipe-book.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { Ingredient } from '../../../shared/ingredient.model';
 import { AddIngredients } from '../../../shopping-list/store/shopping-list.actions';
-import * as fromApp from '../../../../../store/app.reducer';
 import * as fromRecipe from '../../store/recipe.reducer';
 import * as RecipeActions from '../../store/recipe.actions';
 
@@ -26,10 +24,8 @@ export class RecipeDetailComponent implements OnInit {
 
   constructor(
     private snackBar: MatSnackBar,
-    private recipeBookService: RecipeBookService,
     private route: ActivatedRoute,
-    private router: Router,
-    private store: Store<fromApp.AppState>
+    private store: Store<fromRecipe.AppState>
   ) {}
 
   ngOnInit(): void {

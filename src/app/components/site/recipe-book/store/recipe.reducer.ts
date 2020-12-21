@@ -1,8 +1,13 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { Recipe } from '../recipe.model';
 import * as RecipeActions from './recipe.actions';
+import * as fromApp from '../../../../store/app.reducer';
 
-export interface State {
+export interface AppState extends fromApp.AppState {
+  recipe: RecipeState
+}
+
+export interface RecipeState {
   recipes: Recipe[];
   editRecipe: Recipe;
   editRecipeIndex: number;
@@ -10,7 +15,7 @@ export interface State {
   isLoading: boolean;
 }
 
-const initialState: State = {
+const initialState: RecipeState = {
   recipes: [],
   editRecipe: null,
   editRecipeIndex: -1,
@@ -19,7 +24,7 @@ const initialState: State = {
 };
 
 export function recipeReducer(
-  state: State = initialState,
+  state: RecipeState = initialState,
   action: RecipeActions.RecipeActions
 ) {
   switch (action.type) {
@@ -92,6 +97,6 @@ export function recipeReducer(
   }
 }
 
-const getRecipeState = createFeatureSelector<State>('recipe');
+const getRecipeState = createFeatureSelector<RecipeState>('recipe');
 export const getRecipes = createSelector(getRecipeState, state => state.recipes);
 export const isLoading = createSelector(getRecipeState, state => state.isLoading);

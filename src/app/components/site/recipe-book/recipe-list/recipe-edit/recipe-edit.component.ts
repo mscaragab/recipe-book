@@ -5,9 +5,8 @@ import { Store } from '@ngrx/store';
 
 // import { RecipeBookService } from '../../recipe-book.service';
 import { Recipe } from '../../recipe.model';
-import * as fromApp from '../../../../../store/app.reducer';
 import * as RecipeActions from '../../store/recipe.actions';
-import * as fromRecipes from '../../store/recipe.reducer';
+import * as fromRecipe from '../../store/recipe.reducer';
 import { take } from 'rxjs/operators';
 
 @Component({
@@ -30,7 +29,7 @@ export class RecipeEditComponent implements OnInit {
     private route: ActivatedRoute,
     // private recipeService: RecipeBookService,
     private router: Router,
-    private store: Store<fromApp.AppState>
+    private store: Store<fromRecipe.AppState>
   ) {}
 
   ngOnInit(): void {
@@ -40,7 +39,7 @@ export class RecipeEditComponent implements OnInit {
       if (id != null) {
         this.editMode = true;
         this.store
-          .select(fromRecipes.getRecipes)
+          .select(fromRecipe.getRecipes)
           .pipe(take(1))
           .subscribe((recipes) => {
             this.recipe = recipes[id];

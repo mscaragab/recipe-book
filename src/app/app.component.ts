@@ -7,7 +7,6 @@ import * as Recipes from './components/site/recipe-book/store/recipe.actions';
 import * as fromRecipe from './components/site/recipe-book/store/recipe.reducer';
 import { take } from 'rxjs/operators';
 import { Recipe } from './components/site/recipe-book/recipe.model';
-import * as fromAuth from './components/site/auth/store/auth.reducer';
 
 @Component({
   selector: 'app-root',
@@ -23,6 +22,7 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     if (isPlatformBrowser(this.platformId)) {
     }
+
     // this.store
     //   .select(fromAuth.getIsAuth)
     //   .pipe(take(1))

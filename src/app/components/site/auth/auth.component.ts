@@ -13,7 +13,7 @@ import { Observable, Subscription } from 'rxjs';
 import { AlertComponent } from '../shared/alert/alert.component';
 import { PlaceholderDirective } from '../shared/placeholder.directive';
 import { AuthResponseData, AuthService } from './auth.service';
-import * as fromApp from '../../../store/app.reducer';
+import * as fromAuth from './store/auth.reducer';
 import * as AuthActions from '../auth/store/auth.actions';
 
 @Component({
@@ -28,7 +28,7 @@ export class AuthComponent implements OnInit, OnDestroy {
     private authService: AuthService,
     private router: Router,
     private compnentFactoryResolver: ComponentFactoryResolver,
-    private store: Store<fromApp.AppState>
+    private store: Store<fromAuth.AppState>
   ) {}
 
   isLoginMode = true;

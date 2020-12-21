@@ -4,10 +4,10 @@ import { Subscription } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 
 import { DataStorageService } from '../../site/shared/data-storage.service';
-import * as fromApp from '../../../store/app.reducer';
 import * as fromRecipe from '../../site/recipe-book/store/recipe.reducer';
 import * as AuthActions from '../../site/auth/store/auth.actions';
 import * as RecipeActions from '../../site/recipe-book/store/recipe.actions';
+import * as fromAuth from '../../site/auth/store/auth.reducer';
 
 @Component({
   selector: 'app-header',
@@ -24,7 +24,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   constructor(
     private dataStorageService: DataStorageService,
-    private store: Store<fromApp.AppState>
+    private store: Store<fromAuth.AppState>
   ) {}
 
   ngOnInit(): void {

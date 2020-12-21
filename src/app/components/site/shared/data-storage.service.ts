@@ -14,13 +14,14 @@ export class DataStorageService {
     new Recipe(
       'Grilled Chicken',
       'Grilled Chicken Leg with Vegetables Recipe',
+      '',
       'assets/img/grilled-chicken-leg-with-vegetables.jpg',
       [new Ingredient('Chicken', 1), new Ingredient('Vegetables', 5)]
     ),
-    new Recipe('Pasta', 'Pasta Recipe', 'assets/img/pasta.jpg', [
+    new Recipe('Pasta', 'Pasta Recipe', '', 'assets/img/pasta.jpg', [
       new Ingredient('Pasta', 5),
     ]),
-    new Recipe('Cereal', 'Cereal Recipe', 'assets/img/cereal.jpg', [
+    new Recipe('Cereal', 'Cereal Recipe', '', 'assets/img/cereal.jpg', [
       new Ingredient('Cereal', 1),
     ]),
   ];

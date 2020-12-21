@@ -1,14 +1,20 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { User } from '../user.model';
 import * as AuthActions from './auth.actions';
+import * as fromApp from '../../../../store/app.reducer';
 
-export interface State {
+export interface AuthState {
   user: User;
   authError: string;
   isLoading: boolean;
 }
 
-const initialState: State = {
+
+export interface AppState extends fromApp.AppState {
+  auth: AuthState
+}
+
+const initialState: AuthState = {
   user: null,
   authError: null,
   isLoading: false,
@@ -78,5 +84,5 @@ export function authReducer(
   }
 }
 
-const getAuthState = createFeatureSelector<State>('auth');
+const getAuthState = createFeatureSelector<AuthState>('auth');
 export const getIsAuth = createSelector(getAuthState, state => state.user != null);

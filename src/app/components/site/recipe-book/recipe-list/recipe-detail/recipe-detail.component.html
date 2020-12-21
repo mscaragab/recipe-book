@@ -5,7 +5,9 @@
   <img mat-card-image [src]="recipe.imagePath" alt="">
   <mat-card-content>
     <p>{{ recipe.description }}</p>
+    <div [innerHTML]='recipe.details'></div>
     <mat-list>
+      <span class="mat=sub-title">Ingredients</span>
       <mat-list-item *ngFor="let ingredient of recipe.ingredients">{{ ingredient.name }}
         ({{ ingredient.amount }})</mat-list-item>
     </mat-list>

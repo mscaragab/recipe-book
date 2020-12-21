@@ -1,20 +1,26 @@
+import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { Ingredient } from '../../shared/ingredient.model';
 
 import * as ShoppingListActions from './shopping-list.actions';
+import * as fromApp from '../../../../store/app.reducer';
 
-export interface State {
+export interface AppState extends fromApp.AppState {
+  shoppingList: ShoppingListState
+}
+
+export interface ShoppingListState {
   ingredients: Ingredient[];
   editedIngredient: Ingredient;
   editedIngredientIndex: number;
 }
 
-const initialState: State = {
+const initialState: ShoppingListState = {
   ingredients: [new Ingredient('Tomatos', 10), new Ingredient('Cucumber', 5)],
   editedIngredient: null,
   editedIngredientIndex: -1,
 };
 export function shoppingListReducer(
-  state: State = initialState,
+  state: ShoppingListState = initialState,
   action: ShoppingListActions.ShoppingListActions
 ) {
   switch (action.type) {
@@ -68,3 +74,7 @@ export function shoppingListReducer(
       return state;
   }
 }
+
+
+const getState = createFeatureSelector<ShoppingListState>('shopping-list');
+export const getIngredients = createSelector(getState, state => state.ingredients);
