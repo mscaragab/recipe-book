@@ -1,5 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { Recipe } from '../../recipe.model';
+import { LoadRecipeDetailStart } from '../../store/recipe.actions';
+import { AppState } from '../../store/recipe.reducer';
 
 @Component({
   selector: 'app-recipe-item',
@@ -10,7 +13,11 @@ export class RecipeItemComponent implements OnInit {
   @Input() recipe: Recipe;
   @Input() index: string;
 
-  constructor() {}
+  constructor(private store: Store<AppState>) {}
 
   ngOnInit(): void {}
+
+  onLoadRecipeDetail() {
+    this.store.dispatch(new LoadRecipeDetailStart());
+  }
 }

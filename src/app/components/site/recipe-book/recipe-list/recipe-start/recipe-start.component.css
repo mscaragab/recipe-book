@@ -6,3 +6,9 @@
   text-align: center;
   margin-top: 35px;
 }
+
+@media (max-width: 599px) {
+  .start-recipe {
+    display: none;
+  }
+}

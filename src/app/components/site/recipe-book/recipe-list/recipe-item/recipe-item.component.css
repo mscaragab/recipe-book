@@ -5,11 +5,15 @@ mat-card {
 
 mat-card.active {
   color: white;
-  background-color: #03a9f4
-
-  ;
+  background-color: #03a9f4;
 }
 
 mat-card:focus {
   outline: none;
+}
+
+@media (min-width: 600px) {
+  mat-card {
+    width: 300px;
+  }
 }

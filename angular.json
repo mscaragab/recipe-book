@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "project1": {
+    "recipe-book": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/project1/browser",
+            "outputPath": "dist/recipe-book/browser",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -71,18 +71,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "project1:build"
+            "browserTarget": "recipe-book:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "project1:build:production"
+              "browserTarget": "recipe-book:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "project1:build"
+            "browserTarget": "recipe-book:build"
           }
         },
         "test": {
@@ -116,18 +116,18 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "project1:serve"
+            "devServerTarget": "recipe-book:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "project1:serve:production"
+              "devServerTarget": "recipe-book:serve:production"
             }
           }
         },
         "server": {
           "builder": "@angular-devkit/build-angular:server",
           "options": {
-            "outputPath": "dist/project1/server",
+            "outputPath": "dist/recipe-book/server",
             "main": "server.ts",
             "tsConfig": "tsconfig.server.json",
             "externalDependencies": [
@@ -155,21 +155,21 @@
         "serve-ssr": {
           "builder": "@nguniversal/builders:ssr-dev-server",
           "options": {
-            "browserTarget": "project1:build",
-            "serverTarget": "project1:server"
+            "browserTarget": "recipe-book:build",
+            "serverTarget": "recipe-book:server"
           },
           "configurations": {
             "production": {
-              "browserTarget": "project1:build:production",
-              "serverTarget": "project1:server:production"
+              "browserTarget": "recipe-book:build:production",
+              "serverTarget": "recipe-book:server:production"
             }
           }
         },
         "prerender": {
           "builder": "@nguniversal/builders:prerender",
           "options": {
-            "browserTarget": "project1:build:production",
-            "serverTarget": "project1:server:production",
+            "browserTarget": "recipe-book:build:production",
+            "serverTarget": "recipe-book:server:production",
             "routes": ["/"]
           },
           "configurations": {
@@ -179,5 +179,5 @@
       }
     }
   },
-  "defaultProject": "project1"
+  "defaultProject": "recipe-book"
 }

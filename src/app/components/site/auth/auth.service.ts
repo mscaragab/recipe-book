@@ -68,13 +68,13 @@ export class AuthService {
             expirationDate: userData._expirationDate,
           })
         );
-        console.log(
-          new Date().getTime(),
-          '   ***   ',
-          userData._expirationDate,
-          ' *** ',
-          userData._expirationDate - new Date().getTime()
-        );
+        // console.log(
+        //   new Date().getTime(),
+        //   '   ***   ',
+        //   userData._expirationDate,
+        //   ' *** ',
+        //   userData._expirationDate - new Date().getTime()
+        // );
         this.autoLogout(userData._expirationDate * 1000 - new Date().getTime());
       }
     }

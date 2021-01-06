@@ -1,20 +1,33 @@
-<mat-card>
-  <mat-card-title>
-    {{ recipe.name }}
-  </mat-card-title>
-  <img mat-card-image [src]="recipe.imagePath" alt="">
-  <mat-card-content>
-    <p>{{ recipe.description }}</p>
-    <div [innerHTML]='recipe.details'></div>
-    <mat-list>
-      <span class="mat=sub-title">Ingredients</span>
-      <mat-list-item *ngFor="let ingredient of recipe.ingredients">{{ ingredient.name }}
-        ({{ ingredient.amount }})</mat-list-item>
-    </mat-list>
-  </mat-card-content>
-  <mat-card-actions>
-    <button mat-raised-button color="primary" (click)="onToShoppingList()">To Shopping List</button>
-    <button mat-raised-button color="primary" routerLink="edit">Edit Recipe</button>
-    <button mat-raised-button color="warn" (click)="onDelete()">Delete Recipe</button>
-  </mat-card-actions>
-</mat-card>
+<div class='container' #container>
+  <a (click)='onBack()' fxShow fxHide.gt-xs
+    style="text-align: left; margin: 15px; margin-bottom: 0px; text-decoration: none; cursor: pointer; display: inline-block; width: 90%;">
+    <mat-icon>arrow_back</mat-icon> <span style="text-align: center;display: block; margin-top:-25px;">Back to
+      Recipes</span>
+  </a>
+  <mat-card>
+    <mat-card-title class="card-title">
+      {{ recipe.name }}
+    </mat-card-title>
+    <img mat-card-image [src]="recipe.imagePath" alt="">
+    <mat-card-content>
+      <p class="description">{{ recipe.description }}</p>
+      <div class="details" [innerHTML]='recipe.details'></div>
+      <mat-list>
+        <span class="ingredients-title">Ingredients</span>
+        <mat-list-item *ngFor="let ingredient of recipe.ingredients">{{ ingredient.name }}
+          ({{ ingredient.amount }})</mat-list-item>
+      </mat-list>
+    </mat-card-content>
+    <mat-card-actions>
+      <div class='buttons'>
+        <button mat-raised-button color="primary" (click)="onToShoppingList()">To Shopping List</button>
+        <!-- <button mat-raised-button color="primary" routerLink="edit">Edit</button> -->
+        <button mat-raised-button color="primary" (click)='onEdit()'>Edit</button>
+        <button mat-raised-button color="warn" (click)="onDelete()">Delete</button>
+      </div>
+    </mat-card-actions>
+  </mat-card>
+
+  <div style='height:5px;margin-bottom: 55px;'></div>
+
+</div>

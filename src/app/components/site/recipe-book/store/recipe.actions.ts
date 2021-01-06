@@ -10,6 +10,12 @@ export const SAVE_RECIPES = '[Recipe] Save Recipes';
 export const LOAD_RECIPES_START = '[Recipe] Load Recipes Start';
 export const LOAD_RECIPES_SUCCESS = '[Recipe] Load Recipes Success';
 export const LOAD_RECIPES_FAIL = '[Recipe] Load Recipes Fail';
+export const LOAD_RECIPE_DETAIL_START = '[Recipe] Load Recipe Detail Start';
+export const UNLOAD_RECIPE_DETAIL_START = '[Recipe] Unload Recipe Detail Start';
+export const LOADING_RECIPE_DETAIL_COMPLETE = '[Recipe] Loading Recipe Detail Complete';
+export const UNLOADING_RECIPE_DETAIL_COMPLETE = '[Recipe] Unloading Recipe Detail Complete';
+export const SKIP_ANIMATION = '[Recipe] Skip Animation';
+export const RESET_SKIP_ANIMATION_FLAG = '[Recipe] Reset Skip Animation Flag';
 
 export class EditStart implements Action {
   readonly type = EDIT_START;
@@ -63,6 +69,30 @@ export class LoadRecipesFail implements Action {
   constructor(public payload: string) {}
 }
 
+export class LoadRecipeDetailStart implements Action {
+  readonly type = LOAD_RECIPE_DETAIL_START;
+}
+
+export class UnloadRecipeDetailStart implements Action {
+  readonly type = UNLOAD_RECIPE_DETAIL_START;
+}
+
+export class LoadingRecipeDetailComplete implements Action {
+  readonly type = LOADING_RECIPE_DETAIL_COMPLETE;
+}
+
+export class UnloadingRecipeDetailComplete implements Action {
+  readonly type = UNLOADING_RECIPE_DETAIL_COMPLETE;
+}
+
+export class SkipAnimation implements Action {
+  readonly type = SKIP_ANIMATION;
+}
+
+export class ResetSkipAnimationFlag implements Action {
+  readonly type = RESET_SKIP_ANIMATION_FLAG;
+}
+
 export type RecipeActions =
   | EditStart
   | EditCancel
@@ -72,4 +102,10 @@ export type RecipeActions =
   | SaveRecipes
   | LoadRecipesStart
   | LoadRecipesSuccess
-  | LoadRecipesFail;
+  | LoadRecipesFail
+  | LoadRecipeDetailStart
+  | UnloadRecipeDetailStart
+  | LoadingRecipeDetailComplete
+  | UnloadingRecipeDetailComplete
+  | SkipAnimation
+  | ResetSkipAnimationFlag;

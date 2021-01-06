@@ -1,20 +1,139 @@
 img {
   padding: 10px;
   box-sizing: border-box;
+  border-radius: 20px;
 }
 
 mat-card {
   margin: 10px;
 }
 
-@media (min-width: 600px) {
-  img {
-    width: 600px;
-  }
+.container {
+  text-align: center;
+}
+
+.buttons button {
+  margin: 5px 8px;
 }
 
 @media (min-width: 600px) {
   img {
     width: 600px;
+  }
+  .description {
+    max-width: 80%;
+    margin: 10px auto;
+    padding-bottom: 5px;
+    font-size: large;
+  }
+  .details {
+    max-width: 80%;
+    margin: 15px auto;
+    text-align: left;
+  }
+
+  .ingredients-title {
+    /* font-weight: bold; */
+    font-size: large;
+  }
+  mat-list {
+    margin: 15px auto;
+    max-width: 80%;
+  }
+  .card-title {
+    margin: 25px auto;
+    padding-top: 10px;
+  }
+}
+
+@media (max-width: 599px) {
+  .container {
+    position: fixed;
+    top: 56px;
+    z-index: 1;
+    height: calc(100vh - 56px);
+    overflow: scroll;
+    background-color: white;
+    width: 100%;
+  }
+
+  .description {
+    margin: 10px auto;
+    padding-bottom: 5px;
+    font-size: large;
+  }
+  .details {
+    margin: 15px auto;
+    text-align: left;
+  }
+
+  .ingredients-title {
+    font-size: large;
+    display: inline-block;
+    padding-top: 10px;
+    padding-bottom: 25px;
+  }
+  mat-list {
+    margin: 15px auto;
+    max-width: 80%;
+  }
+  .card-title {
+    padding-bottom: 10px;
+  }
+
+  .slidein {
+    animation-name: slidein;
+    animation-duration: 300ms;
+  }
+
+  @keyframes slidein {
+    0% {
+      margin-left: 100%;
+    }
+    100% {
+      margin-left: 0%;
+    }
+  }
+
+  .slideout {
+    animation-name: slideout;
+    animation-duration: 300ms;
+  }
+
+  @keyframes slideout {
+    0% {
+      margin-left: 0%;
+    }
+    100% {
+      margin-left: 100%;
+    }
+  }
+
+  .slideup {
+    animation-name: slideup;
+    animation-duration: 300ms;
+  }
+
+  @keyframes slideup {
+    0% {
+      margin-top: 100vh;
+    }
+    100% {
+      margin-top: 0vh;
+    }
+  }
+
+  .slidedown {
+    animation-name: slidedown;
+    animation-duration: 300ms;
+  }
+
+  @keyframes slidedown {
+    0% {
+      margin-top: 0vh;
+    }
+    100% {
+      margin-top: 100vh;
+    }
   }
 }

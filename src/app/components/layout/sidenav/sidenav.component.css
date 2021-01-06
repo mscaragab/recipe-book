@@ -4,8 +4,9 @@ a {
 }
 
 a:hover,
-a:active {
-  color: lightgray;
+a:active,
+a.active {
+  color:#043a7e;
 }
 
 button[mat-menu-item] span {

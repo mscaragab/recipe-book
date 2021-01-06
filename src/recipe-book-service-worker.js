@@ -12,30 +12,38 @@ function isInArray(arr, val) {
 }
 
 self.addEventListener("install", (event) => {
-  console.log("Installing Service Worker............", event);
+  // console.log("Installing Service Worker............", event);
 });
 
 self.addEventListener("fetch", (event) => {
   if (isInArray(IGNORE_URLS, event.request.url)) {
-    console.log("IGNORED...", event);
+    // console.log("IGNORED...", event);
     return event.response;
   } else {
     event.respondWith(
-      caches.match(event.request).then((response) => {
-        if (response) {
-          console.log("In Cache....", event);
-          return response;
-        } else {
-          console.log('Fetching......live....', event);
-          return fetch(event.request).then((res) => {
-            return caches.open("dynamic-recipes").then((cache) => {
-              console.log('PUT in cache....done...', res.clone());
-              cache.put(event.request, res.clone());
-              return res;
-            });
-          });
-        }
-      })
+      caches
+        .match(event.request)
+        .then((response) => {
+          if (response) {
+            // console.log("In Cache....", event);
+            return response;
+          } else {
+            // console.log('Fetching......live....', event);
+            return fetch(event.request)
+              .then((res) => {
+                return caches
+                  .open("dynamic-recipes")
+                  .then((cache) => {
+                    // console.log('PUT in cache....done...', res.clone());
+                    cache.put(event.request, res.clone());
+                    return res;
+                  })
+                  .catch((err) => console.log(err));
+              })
+              .catch((err) => console.log(err));
+          }
+        })
+        .catch((err) => console.log(err))
     );
   }
 });

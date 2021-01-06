@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { catchError, map, switchMap, take, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { AuthResponseData } from '../auth.service';
@@ -18,31 +18,77 @@ export class AuthEffects {
   private loginEndPoint: string;
   private logoutTimer;
 
+  private users: [];
+
+  private signUpUser(
+    email: string,
+    password: string,
+    returnSecureToken: boolean
+  ): Observable<AuthResponseData> {
+    const observable = new Observable<AuthResponseData>((observer) => {
+      setTimeout(() => {
+        observer.next({
+          email: email,
+          localId: new Date().toISOString(),
+          idToken: new Date().toISOString(),
+          expiresIn: '3600',
+          refreshToken: new Date().toISOString(),
+          registered: false,
+        });
+      }, 1500);
+    });
+    return observable;
+  }
+
+  private loginUser(
+    email: string,
+    password: string,
+    returnSecureToken: boolean
+  ): Observable<AuthResponseData> {
+    const observable = new Observable<AuthResponseData>((observer) => {
+      setTimeout(() => {
+        observer.next({
+          email: email,
+          localId: new Date().toISOString(),
+          idToken: new Date().toISOString(),
+          expiresIn: '3600',
+          refreshToken: new Date().toISOString(),
+          registered: false,
+        });
+      }, 1500);
+    });
+    return observable;
+  }
+
   @Effect()
   authSignUpStart = this.actions$.pipe(
     ofType(AuthActions.SIGNUP_START),
     switchMap((authData: AuthActions.SignUpStart) => {
-      return this.http
-        .post<AuthResponseData>(this.signUpEndPoint, {
-          email: authData.payload.email,
-          password: authData.payload.password,
-          returnSecureToken: true,
+      // return this.http
+      //   .post<AuthResponseData>(this.signUpEndPoint, {
+      //     email: authData.payload.email,
+      //     password: authData.payload.password,
+      //     returnSecureToken: true,
+      //   })
+      return this.signUpUser(
+        authData.payload.email,
+        authData.payload.password,
+        true
+      ).pipe(
+        map((resData) => {
+          return new AuthActions.AutheticationSuccess({
+            email: resData.email,
+            userId: resData.localId,
+            token: resData.idToken,
+            expirationDate: new Date().getTime() + +resData.expiresIn * 1000,
+          });
+        }),
+        catchError((errorRes) => {
+          return of(
+            new AuthActions.AuthenticationFail(this.handleError(errorRes))
+          );
         })
-        .pipe(
-          map((resData) => {
-            return new AuthActions.AutheticationSuccess({
-              email: resData.email,
-              userId: resData.localId,
-              token: resData.idToken,
-              expirationDate: new Date().getTime() + +resData.expiresIn * 1000,
-            });
-          }),
-          catchError((errorRes) => {
-            return of(
-              new AuthActions.AuthenticationFail(this.handleError(errorRes))
-            );
-          })
-        );
+      );
     })
   );
 
@@ -50,27 +96,32 @@ export class AuthEffects {
   authLoginStart = this.actions$.pipe(
     ofType(AuthActions.LOGIN_START),
     switchMap((authData: AuthActions.LoginStart) => {
-      return this.http
-        .post<AuthResponseData>(this.loginEndPoint, {
-          email: authData.payload.email,
-          password: authData.payload.password,
-          returnSecureToken: true,
+      // return this.http
+      //   .post<AuthResponseData>(this.loginEndPoint, {
+      //     email: authData.payload.email,
+      //     password: authData.payload.password,
+      //     returnSecureToken: true,
+      //   })
+
+      return this.loginUser(
+        authData.payload.email,
+        authData.payload.password,
+        true
+      ).pipe(
+        map((resData) => {
+          return new AuthActions.AutheticationSuccess({
+            email: resData.email,
+            userId: resData.localId,
+            token: resData.idToken,
+            expirationDate: new Date().getTime() + +resData.expiresIn * 1000,
+          });
+        }),
+        catchError((errorRes) => {
+          return of(
+            new AuthActions.AuthenticationFail(this.handleError(errorRes))
+          );
         })
-        .pipe(
-          map((resData) => {
-            return new AuthActions.AutheticationSuccess({
-              email: resData.email,
-              userId: resData.localId,
-              token: resData.idToken,
-              expirationDate: new Date().getTime() + +resData.expiresIn * 1000,
-            });
-          }),
-          catchError((errorRes) => {
-            return of(
-              new AuthActions.AuthenticationFail(this.handleError(errorRes))
-            );
-          })
-        );
+      );
     })
   );
 
@@ -84,14 +135,14 @@ export class AuthEffects {
     //   localStorage.setItem('user', JSON.stringify(this.userData));
     // }),
     switchMap((authData: AuthActions.AutheticationSuccess) => {
-      console.log('@Effects Auth Success, User: ', authData.payload);
+      // console.log('@Effects Auth Success, User: ', authData.payload);
       this.userData = authData.payload;
       localStorage.setItem('user', JSON.stringify(this.userData));
       const expiresIn =
         this.userData.expirationDate * 1000 - new Date().getTime();
       return of(
         new RecipeActions.LoadRecipesStart(),
-        new AuthActions.Redirect(),
+        new AuthActions.Redirect()
         // new AuthActions.AutoLogout(expiresIn)
       );
     })

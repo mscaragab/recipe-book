@@ -4,7 +4,7 @@ import * as RecipeActions from './recipe.actions';
 import * as fromApp from '../../../../store/app.reducer';
 
 export interface AppState extends fromApp.AppState {
-  recipe: RecipeState
+  recipe: RecipeState;
 }
 
 export interface RecipeState {
@@ -13,6 +13,9 @@ export interface RecipeState {
   editRecipeIndex: number;
   error: string;
   isLoading: boolean;
+  startLoadingDetail: boolean;
+  startUnloadingDetail: boolean;
+  skipAnimation: boolean;
 }
 
 const initialState: RecipeState = {
@@ -21,6 +24,9 @@ const initialState: RecipeState = {
   editRecipeIndex: -1,
   error: null,
   isLoading: false,
+  startLoadingDetail: false,
+  startUnloadingDetail: false,
+  skipAnimation: false,
 };
 
 export function recipeReducer(
@@ -52,7 +58,7 @@ export function recipeReducer(
         ...state,
         recipes: updatedRecipes,
         recipe: null,
-        editRecipeIndex: -1
+        editRecipeIndex: -1,
       };
     case RecipeActions.ADD_RECIPE:
       const recipes1 = state.recipes.slice();
@@ -92,11 +98,59 @@ export function recipeReducer(
         error: action.payload,
         isLoading: false,
       };
+    case RecipeActions.LOAD_RECIPE_DETAIL_START:
+      return {
+        ...state,
+        startLoadingDetail: true,
+      };
+    case RecipeActions.UNLOAD_RECIPE_DETAIL_START:
+      return {
+        ...state,
+        startUnloadingDetail: true,
+      };
+    case RecipeActions.LOADING_RECIPE_DETAIL_COMPLETE:
+      return {
+        ...state,
+        startLoadingDetail: false,
+      };
+    case RecipeActions.UNLOADING_RECIPE_DETAIL_COMPLETE:
+      return {
+        ...state,
+        startUnloadingDetail: false,
+      };
+    case RecipeActions.SKIP_ANIMATION:
+      return {
+        ...state,
+        skipAnimation: true,
+      };
+    case RecipeActions.RESET_SKIP_ANIMATION_FLAG:
+      return {
+        ...state,
+        skipAnimation: false,
+      };
     default:
       return state;
   }
 }
 
 const getRecipeState = createFeatureSelector<RecipeState>('recipe');
-export const getRecipes = createSelector(getRecipeState, state => state.recipes);
-export const isLoading = createSelector(getRecipeState, state => state.isLoading);
+export const getRecipes = createSelector(
+  getRecipeState,
+  (state) => state.recipes
+);
+export const isLoading = createSelector(
+  getRecipeState,
+  (state) => state.isLoading
+);
+export const loadingDetailStart = createSelector(
+  getRecipeState,
+  (state) => state.startLoadingDetail
+);
+export const unloadingDetailStart = createSelector(
+  getRecipeState,
+  (state) => state.startUnloadingDetail
+);
+export const skipAnimationn = createSelector(
+  getRecipeState,
+  (state) => state.skipAnimation
+);

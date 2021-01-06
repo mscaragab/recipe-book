@@ -2,3 +2,10 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.snackbar {
+  width: 90%;
+  margin:8px auto;
+  margin-top:65px;
+  color:white;
+  background-color: deeppink;
+}

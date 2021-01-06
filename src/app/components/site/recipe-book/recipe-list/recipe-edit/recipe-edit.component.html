@@ -1,47 +1,52 @@
-<section>
+<div class='container'>
+   <mat-dialog-content>
 
-  <form [formGroup]="form" (ngSubmit)="onSubmit()" fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="10px">
-    <div>
-      <span class="mat-title"> {{ editMode ? 'Edit ' + recipe.name : 'New Recipe'}} </span>
-    </div>
-    <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="20px">
-      <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Save</button>
-      <button type="button" mat-raised-button color="warn" (click)="onCancel()">Cancel</button>
-    </div>
 
-    <mat-form-field>
-      <input matInput placeholder="Name" type="text" style="width: 30rem;" id="name" formControlName="name" #name>
-    </mat-form-field>
-    <mat-form-field>
-      <input matInput placeholder="Image URL" type="text" style="width: 30rem;" id="imagePath"
-        formControlName="imagePath" #imagePath>
-    </mat-form-field>
-    <img [src]="imagePath.value" alt="{{ name.value }}">
-    <mat-form-field>
-      <textarea matInput placeholder="Description" type="text" class="form-control" id="description" rows="6"
-        formControlName="description"></textarea>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="10px">
 
-    </mat-form-field>
-
-    <div formArrayName="ingredients">
-      <div *ngFor="let control of controls; let i = index" [formGroupName]="i">
-        <div class="ingredient-row">
-          <mat-form-field class="ingredient-name">
-            <input matInput placeholder="Name" type="text" formControlName="name">
-          </mat-form-field>
-          <mat-form-field class="ingredient-amount">
-            <input matInput placeholder="Amount" type="number" formControlName="amount">
-          </mat-form-field>
-          <button mat-icon-button (click)="onDeleteIngredient(i)">
-            <mat-icon>delete</mat-icon>
-          </button>
-        </div>
+      <div class="buttons" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="20px">
+        <button mat-raised-button color="primary" type="submit" mat-dialog-close [disabled]="form.invalid">Save</button>
+        <button type="button" mat-raised-button color="warn" mat-dialog-close (click)="onCancel()">Cancel</button>
       </div>
-      <button mat-raised-button style="margin-bottom: 30px; margin-left: 15px;" color="primary" type="button"
-        (click)="onAddIngredient()">Add Ingredient</button>
-    </div>
-  </form>
-</section>
+
+      <mat-form-field>
+        <input matInput placeholder="Name" type="text" style="width: 30rem;" id="name" formControlName="name" #name>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Image URL" type="text" style="width: 30rem;" id="imagePath"
+          formControlName="imagePath" #imagePath>
+      </mat-form-field>
+      <img [src]="imagePath.value" alt="{{ name.value }}">
+      <mat-form-field>
+        <textarea matInput placeholder="Description" type="text" class="form-control" id="description" rows="6"
+          formControlName="description"></textarea>
+
+      </mat-form-field>
+
+      <div formArrayName="ingredients">
+        <div *ngFor="let control of controls; let i = index" [formGroupName]="i">
+          <div class="ingredient-row">
+            <mat-form-field class="ingredient-name">
+              <input matInput placeholder="Name" type="text" formControlName="name">
+            </mat-form-field>
+            <mat-form-field class="ingredient-amount">
+              <input matInput placeholder="Amount" type="number" formControlName="amount">
+            </mat-form-field>
+            <button mat-icon-button (click)="onDeleteIngredient(i)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </div>
+        <button mat-raised-button style="margin-bottom: 30px; margin-left: 15px;" color="primary" type="button"
+          (click)="onAddIngredient()">Add Ingredient</button>
+      </div>
+    </form>
+
+
+
+  </mat-dialog-content>
+</div>
+<!-- <div style='height:50px;'></div> -->
 
 
 

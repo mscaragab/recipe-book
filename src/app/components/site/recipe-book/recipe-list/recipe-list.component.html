@@ -1,5 +1,4 @@
-<button style="margin-left: 15px; margin-top: 15px; margin-bottom: 15px;" mat-raised-button color="primary"
-  routerLink="new">New Recipe</button>
+<button (click)='onNew()' style="margin-left: 15px; margin-top: 15px; margin-bottom: 15px;" mat-raised-button color="primary">New Recipe</button>
 
 <app-recipe-item *ngFor="let recipe of recipes$ | async; let i = index" [index]="i" [recipe]="recipe">
 </app-recipe-item>

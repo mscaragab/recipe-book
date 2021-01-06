@@ -1,3 +1,24 @@
+.title {
+  text-align: center;
+}
+
+img {
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.title {
+  margin-top: 15px;
+  margin-bottom: 10px;
+}
+
+.buttons {
+  margin-top: 15px;
+}
+
+mat-card {
+  margin: 10px;
+}
 
 .ingredient-row {
   text-align: center;
@@ -6,6 +27,11 @@
 @media (min-width: 600px) {
   img {
     width: 600px;
+  }
+
+  .container {
+    padding: 0 15px;
+    margin: 15px;
   }
 
   mat-form-field {
@@ -25,7 +51,20 @@
 
 @media (max-width: 599px) {
   img {
-    width: 80%;
+    width: 90%;
+    /* padding: 0px; */
+  }
+
+  .mat-dialog-content {
+    max-height: 82vh;
+  }
+
+  .mat-dialog-container {
+    padding: 10px;
+  }
+
+  mat-card {
+    margin: 0px;
   }
 
   mat-form-field {
@@ -38,6 +77,6 @@
 
   .ingredient-amount {
     width: 15%;
-    margin-left: 10px;
+    margin-left: 5px;
   }
 }

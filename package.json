@@ -1,5 +1,5 @@
 {
-  "name": "project1",
+  "name": "recipe-book",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -8,10 +8,10 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "dev:ssr": "ng run project1:serve-ssr",
-    "serve:ssr": "node dist/project1/server/main.js",
-    "build:ssr": "ng build --prod && ng run project1:server:production",
-    "prerender": "ng run project1:prerender",
+    "dev:ssr": "ng run recipe-book:serve-ssr",
+    "serve:ssr": "node dist/recipe-book/server/main.js",
+    "build:ssr": "ng build --prod && ng run recipe-book:server:production",
+    "prerender": "ng run recipe-book:prerender",
     "prebuild:ssr": "ngcc"
   },
   "private": true,

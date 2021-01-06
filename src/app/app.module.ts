@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LayoutModule } from '@angular/cdk/layout';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/layout/header/header.component';
@@ -25,6 +26,7 @@ import { SidenavComponent } from './components/layout/sidenav/sidenav.component'
     BrowserAnimationsModule,
     FlexLayoutModule,
     MaterialModule,
+    LayoutModule,
     StoreModule.forRoot(fromApp.AppReducer),
     EffectsModule.forRoot([AuthEffects, RecipeEffects]),
     HttpClientModule,

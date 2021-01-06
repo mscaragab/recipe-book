@@ -1,6 +1,6 @@
 {
-  "name": "project1",
-  "short_name": "project1",
+  "name": "recipe-book",
+  "short_name": "recipe-book",
   "theme_color": "#03a9f4",
   "background_color": "white",
   "display": "standalone",
