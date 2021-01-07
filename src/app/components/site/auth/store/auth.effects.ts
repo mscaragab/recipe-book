@@ -5,17 +5,25 @@ import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable, of } from 'rxjs';
 import { catchError, map, switchMap, take, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { AuthResponseData } from '../auth.service';
 import * as AuthActions from '../store/auth.actions';
 import * as RecipeActions from '../../recipe-book/store/recipe.actions';
 import { User } from '../user.model';
 import { UIService } from '../../shared/ui.service';
 import { title } from 'process';
 
+export interface AuthResponseData {
+  email: string;
+  localId: string;
+  idToken: string;
+  expiresIn: string;
+  refreshToken: string;
+  registered: boolean;
+}
+
 @Injectable()
 export class AuthEffects {
-  private signUpEndPoint: string;
-  private loginEndPoint: string;
+  // private signUpEndPoint: string;
+  // private loginEndPoint: string;
   private logoutTimer;
 
   private users: [];
@@ -199,12 +207,12 @@ export class AuthEffects {
     private router: Router,
     private uiService: UIService
   ) {
-    this.loginEndPoint =
-      'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=' +
-      environment.API_KEY;
-    this.signUpEndPoint =
-      'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=' +
-      environment.API_KEY;
+    // this.loginEndPoint =
+    //   'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=' +
+    //   environment.API_KEY;
+    // this.signUpEndPoint =
+    //   'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=' +
+    //   environment.API_KEY;
   }
 
   private handleError(errorRes) {

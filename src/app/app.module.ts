@@ -18,6 +18,8 @@ import { AuthEffects } from './components/site/auth/store/auth.effects';
 import { RecipeEffects } from './components/site/recipe-book/store/recipe.effects';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { SidenavComponent } from './components/layout/sidenav/sidenav.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [AppComponent, HeaderComponent, SidenavComponent],
@@ -33,20 +35,14 @@ import { SidenavComponent } from './components/layout/sidenav/sidenav.component'
     AppRoutingModule,
     SharedModule,
     NotFoundModule,
-    // ServiceWorkerModule.register('./ngsw-worker.js', { enabled: environment.production }),
+    ServiceWorkerModule.register('./ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptorService,
       multi: true,
-    },
-    // {
-    //   provide: APP_INITIALIZER,
-    //   useFactory: (service: AppInitializerService) => service.init(),
-    //   deps: [AppInitializerService],
-    //   multi: true
-    // }
+    }
   ],
   bootstrap: [AppComponent],
 })

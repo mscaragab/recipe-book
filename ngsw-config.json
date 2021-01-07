@@ -7,7 +7,7 @@
       "installMode": "prefetch",
       "resources": {
         "files": [
-          "/favicon.ico",
+          "/favicon.png",
           "/index.html",
           "/manifest.webmanifest",
           "/*.css",
@@ -27,17 +27,6 @@
         "urls": [
           "https://**/*.jpg*", "https://**/*.png*"
         ]
-      }
-    }
-  ],
-  "dataGroups": [
-    {
-      "name": "recipes",
-      "urls": ["https://ng-guide-1473a.firebaseio.com/recipes.json"],
-      "cacheConfig": {
-        "maxSize": 1,
-        "maxAge": "1d",
-        "strategy": "performance"
       }
     }
   ],

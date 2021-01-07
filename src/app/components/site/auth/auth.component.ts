@@ -12,9 +12,9 @@ import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { AlertComponent } from '../shared/alert/alert.component';
 import { PlaceholderDirective } from '../shared/placeholder.directive';
-import { AuthResponseData, AuthService } from './auth.service';
 import * as fromAuth from './store/auth.reducer';
 import * as AuthActions from '../auth/store/auth.actions';
+import { AuthResponseData } from './store/auth.effects';
 
 @Component({
   selector: 'app-auth',
@@ -25,7 +25,6 @@ export class AuthComponent implements OnInit, OnDestroy {
   @ViewChild('form') form: NgForm;
 
   constructor(
-    private authService: AuthService,
     private router: Router,
     private compnentFactoryResolver: ComponentFactoryResolver,
     private store: Store<fromAuth.AppState>

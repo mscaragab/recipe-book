@@ -20,14 +20,14 @@
             "tsConfig": "tsconfig.app.json",
             "aot": true,
             "assets": [
-              "src/favicon.ico",
+              "src/favicon.png",
               "src/assets",
               {
                 "glob": "_redirects",
                 "input": "src",
                 "output": "/"
               },
-              "src/recipe-book-service-worker.js"
+              "src/manifest.webmanifest"
             ],
             "styles": [
               "src/my-theme.scss",
