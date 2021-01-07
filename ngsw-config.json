@@ -22,11 +22,14 @@
       "resources": {
         "files": [
           "/assets/**",
-          "/*.(eot|svg|cur|jpg|png|webp|gif|otf|ttf|woff|woff2|ani)"
+          "/*.(eot|svg|cur|jpg|png|webp|gif|otf|ttf|woff|woff2|ani)",
+          "https://us.123rf.com/450wm/gbh007/gbh0071304/gbh007130400227/19108392-cuisse-de-poulet-grill%C3%A9-avec-des-l%C3%A9gumes.jpg?ver=6",
+          "https://previews.123rf.com/images/nitr/nitr1302/nitr130200048/18032406-grilled-steak-with-french-fries.jpg",
+          "https://www.kitchensanctuary.com/wp-content/uploads/2019/09/Spaghetti-Bolognese-tall-FS-0204.jpg",
+          "https://i2.wp.com/www.downshiftology.com/wp-content/uploads/2018/12/Shakshuka-19.jpg",
+          "https://www.jessicagavin.com/wp-content/uploads/2018/09/fried-rice-8-1200.jpg"
         ],
-        "urls": [
-          "https://**/*.jpg*", "https://**/*.png*"
-        ]
+        "urls": []
       }
     }
   ],
