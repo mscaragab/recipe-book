@@ -42,8 +42,6 @@ export class AuthComponent implements OnInit, OnDestroy {
 
   closeSubscription: Subscription;
 
-
-
   ngOnInit(): void {}
 
   onSubmit() {
@@ -71,9 +69,10 @@ export class AuthComponent implements OnInit, OnDestroy {
     this.errorSub = this.store.select('auth').subscribe((resData) => {
       this.error = resData.authError;
       this.isLoading = resData.isLoading;
+      if (resData.authError) {
+        this.form.reset();
+      }
     });
-
-    this.form.reset();
   }
 
   private showErrorAlert(message: string) {
